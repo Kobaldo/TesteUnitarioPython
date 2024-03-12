@@ -1,0 +1,3 @@
+[run]
+omit = 
+    teste_calculo_media.py
