@@ -37,7 +37,7 @@ class TestCalcularMedia(unittest.TestCase):
     
 if __name__ == '__main__':
     # Criar uma instância do Coverage com o arquivo .coveragerc
-    cov = coverage.Coverage(config_file='.coveragerc.txt')
+    cov = coverage.Coverage(config_file='TesteUnitarioPython\.coveragerc.txt')
 
     # Iniciar a medição da cobertura
     cov.start()
