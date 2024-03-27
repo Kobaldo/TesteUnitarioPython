@@ -1,0 +1,78 @@
+import unittest
+import coverage
+import webbrowser
+import os
+import mock
+from calculadora import adicao, subtracao, multiplicacao, divisao, calculadora, potenciacao
+
+class TestCalcularMedia(unittest.TestCase):
+    def test_adicao(self):
+        resultado = adicao(5,6)
+        self.assertEqual(resultado, 11.0)
+
+    def test_subtracao(self):
+        resultado = subtracao(5,4)
+        self.assertAlmostEqual(resultado, 1.0)
+
+    def test_multiplicacao(self):
+        resultado = multiplicacao(5,4)
+        self.assertAlmostEqual(resultado, 20.0)
+
+    def test_divisao(self):
+        resultado = divisao(9,3)
+        self.assertAlmostEqual(resultado, 3.0)
+
+    def test_potenciacao(self):
+        resultado = potenciacao(2,3)
+        self.assertAlmostEqual(resultado, 8.0)
+
+    def test_erro_divisao(self):
+        with self.assertRaises(ValueError):
+            divisao(9,0)
+
+    def test_menu1(self):
+        with mock.patch('builtins.input', return_value="1"):
+            assert calculadora() == 1
+
+    def test_menu2(self):
+        with mock.patch('builtins.input', return_value="2"):
+            assert calculadora() == 2
+    
+    def test_menu3(self):
+        with mock.patch('builtins.input', return_value="3"):
+            assert calculadora() == 3
+
+    def test_menu4(self):
+        with mock.patch('builtins.input', return_value="4"):
+            assert calculadora() == 4
+
+    def test_menu5(self):
+        with mock.patch('builtins.input', return_value="5"):
+            assert calculadora() == 5
+
+    def test_menu6(self):
+        with mock.patch('builtins.input', return_value="6"):
+            assert calculadora() == 6   
+
+
+if __name__ == '__main__':
+    # Criar uma instância do Coverage com o arquivo .coveragerc
+    cov = coverage.Coverage(config_file='TesteUnitarioPython-main\.coveragerc.txt')
+
+    # Iniciar a medição da cobertura
+    cov.start()
+
+    # Executar os testes
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestCalcularMedia)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+
+    # Encerrar a medição da cobertura após os testes
+    cov.stop()
+
+    # Salvar os dados de cobertura em um arquivo
+    cov.save()
+    cov.html_report(directory='htmlcov')
+
+    # Abra o relatório no navegador
+    index_file = os.path.join('htmlcov', 'index.html')
+    webbrowser.open('file://' + os.path.abspath(index_file))
